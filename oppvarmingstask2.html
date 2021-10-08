@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>katt eller frosk</title>
+</head>
+<body>
+    <!--HTML for bilder og div output-->
+    <h3>Katt eller frosk?</h3>
+    <img id="person-1" src="person1.jpg">
+    <img id="person-2" src="person2.jpg">
+    <div id="output-div"></div>
+
+    <script>
+
+        //Oppretter variabler
+        var outputDiv = document.getElementById("output-div");
+        var person1 = document.getElementById("person-1");
+        var person2 = document.getElementById("person-2");
+        var randomNumber= Math.floor(Math.random() * 2+1);
+
+    //derretter kjører en else-if for å vise om personen liker katt eller frosk
+    function cat_or_frog1(){
+
+        if(randomNumber == 1){
+            outputDiv.innerHTML = `<h2>Liker katter</h2><img src="cat.jpg";`;
+        } else if(randomNumber == 2){
+            outputDiv.innerHTML = `<h2>Liker frosker</h2><img src="frog.jpg";`;
+        }
+    }
+
+    function cat_or_frog2(){
+
+        if(randomNumber == 2){
+            outputDiv.innerHTML = `<h2>Liker katter</h2><img src="cat.jpg";`;
+        } else if(randomNumber == 1){
+            outputDiv.innerHTML = `<h2>Liker frosker</h2><img src="frog.jpg";`;
+        }
+    }
+
+
+
+    //onclick for bildene
+    person1.onclick = cat_or_frog1;
+    person2.onclick = cat_or_frog2;
+    </script>
+</body>
+</html>

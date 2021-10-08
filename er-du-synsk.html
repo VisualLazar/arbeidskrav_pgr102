@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="er-du-synsk.css">
+    <title>Er du synsk?</title>
+</head>
+<body id="body-hit-the-floor">
+    
+    <header>
+        <h1>Er du synsk?</h1>
+    </header>
+
+    <!-- HTML -->
+    <section>
+        <div id="box1-div">Denne?</div>
+        <div id="box2-div">Eller denne?</div>
+    </section>
+
+    <div id="number-of-lives-div"></div>
+
+    <div id="right-answer-amount-div">
+        <p>Antall riktig: 0</p>
+    </div>
+
+    <div id="wrong-answer-amount-div">
+        <p>Antall feil: 0</p>
+    </div>    
+
+    <div id="output-div">
+        <p>Klikk på en av boksene for å begynne spillet</p>            
+    </div>
+
+    <!-- JS -->
+    <script>
+        
+        //HTML-objekter
+        var box1Div= document.getElementById("box1-div");
+        var box2Div = document.getElementById("box2-div");
+        var numberOfLives = document.getElementById("number-of-lives-div");
+        var rightAnswerBox = document.getElementById("right-answer-amount-div");
+        var wrongAnswerBox = document.getElementById("wrong-answer-amount-div");
+        var outputDiv = document.getElementById("output-div");
+        var bodyHitTheFloor = document.getElementById("body-hit-the-floor");
+
+        // Variabler
+        var clickBox1 = 1;
+        var clickBox2 = 2;
+        var HP = 5;
+        var rightAnswer = 0;
+        var wrongAnswer = 0;
+        var bonusHP3 = 3;
+        var bonusHP5 = 5;
+        var bonusHP7 = 7;
+        var randomNumber;
+        
+        // Funksjoner
+
+        // funksjon for når spilleren vinner spillet
+        function gameWon(){
+            if(rightAnswer == 10){
+                bodyHitTheFloor.innerHTML = "";
+                bodyHitTheFloor.innerHTML = `<h2>You won</h2> <img src ="fireworks.jpg">`;
+            }
+        }
+
+        // funksjon for når spilleren har tapt spillet
+        function gameLost(){
+            if(HP == 0){
+                bodyHitTheFloor.innerHTML = ""
+                bodyHitTheFloor.innerHTML = `<h2>Suck it you lost</h2><img src ="losing_screen.jpg">`
+            }
+        }
+
+        // funksjon for å displaye antall liv
+        function currentHP(){
+            numberOfLives.innerHTML ="";
+            for(i = 0; i < HP; i++){
+                numberOfLives.innerHTML += `<img src ="person3.jpg">`;
+            }
+        }
+
+        // funksjon for å legge til bonus HP
+        function addBonusHP(){
+            if(rightAnswer == bonusHP3 || rightAnswer == bonusHP5 || rightAnswer == bonusHP7){
+                HP++;
+                currentHP();
+            }
+        }
+
+        // Funksjon for box 1 og 2
+        // Når man trykker på en av boksene vil den kjøre en if-else statement og legge til eller fjerne
+        // liv hvis randomNumber er lik som verdien til boksen.
+        function rightOrWrongAnswerBox1(){
+            randomNumber = Math.floor(Math.random() * 2+1);
+            if(randomNumber == clickBox1){
+                rightAnswerBox.innerHTML = `Antall riktig: ${rightAnswer += 1}`;
+                addBonusHP();
+                gameWon();
+            } else{
+                HP--;
+                wrongAnswerBox.innerHTML = `Antall feil: ${wrongAnswer += 1}`;
+                currentHP();
+                gameLost();
+            }
+            
+        }
+        
+        function rightOrWrongAnswerBox2(){
+            randomNumber = Math.floor(Math.random() * 2+1);
+            if(randomNumber == clickBox2){
+                rightAnswerBox.innerHTML = `Antall riktig: ${rightAnswer += 1}`;
+                addBonusHP();
+                gameWon();
+            } else{
+                HP--;
+                wrongAnswerBox.innerHTML = `Antall feil: ${wrongAnswer += 1}`;
+                currentHP();
+                gameLost();
+            }
+        }
+        // Events
+        box1Div.onclick = rightOrWrongAnswerBox1;
+        box2Div.onclick = rightOrWrongAnswerBox2;
+        currentHP();
+    </script>
+
+
+</body>
+</html>

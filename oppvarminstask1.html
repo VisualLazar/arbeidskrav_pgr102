@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppvarmingstask 1</title>
+</head>
+    <!--HTML-->
+    <body>
+    
+    <!--litt HTML for å få en knapp og litt tekst samt opprette en div-->
+    <h3>Klikk for opptil 100 bilder av et utvalg av folk</h3>
+    <p id="pic-amount">Antall bilder: </p>
+    <div id="output-div"></div>
+    <input id="img-btn" type="button" value="Legg til bilder"> 
+
+    <!--javascript-->
+    <script>
+
+        // oppretter variabler
+        var outputDiv = document.getElementById("output-div");
+        var imgBtn = document.getElementById("img-btn");
+        var picAmount = document.getElementById("pic-amount");
+        var randomNumber;
+        var randomNumber2;
+
+        //funksjon for å generere tilfeldig tall opptil 100
+        function createRandomNumber(){
+            outputDiv.innerHTML ="";
+            randomNumber = Math.floor(Math.random() * 100 );
+
+            for(var i = 0; i < randomNumber; i++){
+                randomNumber2 = Math.floor(Math.random() * 4); //kan sette Math.floor( Math.random() * 4+1) for å slippe integer (0-3)
+                picAmount.innerHTML = `Antall bilder: ${randomNumber}`;
+
+                // if-else statement som genererer et tilfeldig tall for hvert tall fra integer
+                if(randomNumber2 == 0){
+                    outputDiv.innerHTML += `<img src="person1.jpg">`;
+                } else if (randomNumber2 == 1) {
+                    outputDiv.innerHTML += `<img src="person2.jpg"`;
+                } else if (randomNumber2 == 2) {
+                    outputDiv.innerHTML += `<img src="person3.jpg">`;
+                } else if (randomNumber2 == 3) {
+                    outputDiv.innerHTML += `<img src="person4.jpg">`;
+                }
+            }
+        }
+
+        imgBtn.onclick = createRandomNumber;
+
+
+    </script>
+</body>
+</html>
